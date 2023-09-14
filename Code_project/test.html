@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./JS/echarts.js"></script>
+    <title>Document</title>
+    <style>
+        .div {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" class="div"></div>
+    <script>
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        const data = [];
+        for (let i = 0; i <= 100; i++) {
+            let theta = (i / 100) * 360;
+            let r = 5 * (1 + Math.sin((theta / 180) * Math.PI));
+            data.push([r, theta]);
+        }
+        option = {
+            title: {
+                text: 'Polar'
+            },
+            legend: {
+                data: ['line']
+            },
+            polar: {},
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            angleAxis: {
+                type: 'value',
+                startAngle: 0
+            },
+            radiusAxis: {},
+            series: [{
+                coordinateSystem: 'polar',
+                name: 'line',
+                type: 'line',
+                data: data
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../layui-v2.7.6/layui/css/layui.css">
+    <title>登录客户端</title>
+    <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body onload="randoms()">
+    <section>
+        <!-- 背景颜色 -->
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="box">
+            <!-- 背景圆 -->
+            <div class="circle" style="--x:0"></div>
+            <div class="circle" style="--x:1"></div>
+            <div class="circle" style="--x:2"></div>
+            <div class="circle" style="--x:3"></div>
+            <div class="circle" style="--x:4"></div>
+            <!-- 登录框 -->
+            <div class="container">
+                <center>
+                    <div class="form">
+                        <h3>CRM后台管理系统</h3>
+                        <h2>登录</h2>
+                        <form class="layui-form" id="loginform" action="" method="" name="form1">
+                            <div class="inputBox">
+                                <input type="text" placeholder="请输入用户名" name="name" id="id" required
+                                    lay-verify="required">
+
+                            </div>
+                            <div class="inputBox">
+                                <input type="password" placeholder="请输入密码" name="password" id="password" required
+                                    lay-verify="required">
+
+                            </div>
+                            <div class="inputBox">
+                                <input type="submit" value="登录" id="input1" lay-submit lay-filter="formDemo">
+                                <input type="reset" lay-filter="formDemo" value="重置" id="input1">
+
+                            </div>
+                        </form>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </section>
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <script>
+        //Demo
+        layui.use(['form', 'jquery'], function () {
+            var form = layui.form;
+
+            var $ = layui.jquery;
+            //监听提交
+            layui.use(['form', 'jquery'], function () {
+                var form = layui.form;
+
+                var $ = layui.jquery;
+                //监听提交
+                form.on('submit(formDemo)', function (data) {
+                    //ajax提交异步请求
+                    $.ajax({
+                        type: "POST", //请求方式
+                        url: "http://localhost:8080/user/login", //请求后端的url
+                        data: data.field, //传输到后端的数据
+                        dataType: "JSON",
+                        success: function (res) {
+                            console.log(res.msg);
+                            if (res.msg) {
+                                layer.msg("登录成功");
+                                //将登录用户的u_id,r_id存到session缓存里，供后续使用
+                                window.sessionStorage.setItem("u_id", res.user
+                                    .u_id);
+                                window.sessionStorage.setItem("r_id", res.user
+                                    .r_id);
+                                location.href = "../index.html"
+                            } else {
+                                layer.msg("登录失败");
+
+                            }
+                        }
+                    });
+                    return false;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

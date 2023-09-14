@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layui-v2.7.6/layui/css/layui.css">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="layui-form form-horizontal" style="margin-top: 20px;" method="" lay-filter="formTest">
+        <!-- <div class="form-group">
+            <label class="col-md-1 control-label">编号</label>
+            <div class="col-sm-11">
+                <input name="sc_id" class="form-control">
+            </div>
+        </div> -->
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户名称</label>
+            <div class="col-sm-11">
+                <input name="sc_cusname" lay-verify="required" class="form-control" placeholder="请输入客户名称">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">联系人</label>
+            <div class="col-sm-11">
+                <input name="sc_name" lay-verify="required" class="form-control" placeholder="请输入联系人">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">联系电话</label>
+            <div class="col-sm-11">
+                <input name="sc_phone" lay-verify="phone" class="form-control" placeholder="请输入联系电话">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">成功机率</label>
+            <div class="col-sm-11">
+                <input name="sc_success" lay-verify="required" class="form-control" placeholder="请输入成功机率">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">概要</label>
+            <div class="col-sm-11">
+                <input name="sc_message" class="form-control" placeholder="请输入客户概要">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">机会描述</label>
+            <div class="col-sm-11">
+                <input name="sc_desc" class="form-control" placeholder="请输入机会描述">
+            </div>
+        </div>
+
+
+        <!-- <div class="form-group">
+            <label class="col-md-1 control-label">创建人</label>
+            <div class="col-sm-11">
+                <input name="sc_createuserid" lay-verify="required" class="form-control" placeholder="请输入创建人">
+            </div>
+        </div> -->
+
+
+        <!-- <div class="form-group">
+            <label class="col-md-1 control-label">被指派人</label>
+            <div class="col-sm-11">
+                <input name="sc_giveuserid" lay-verify="required" class="form-control" placeholder="请输入被指派人">
+            </div>
+        </div> -->
+
+        <!-- 数据库根据创建时间自动赋值 -->
+        <!-- <div class="form-group">
+            <label class="col-md-1 control-label">创建时间</label>
+            <div class="col-sm-11">
+                <input name="sc_createtime" lay-verify="required" id="datatime" class="form-control"
+                    placeholder="请输入创建时间">
+            </div>
+        </div> -->
+
+
+        <!-- <div class="form-group">
+            <label class="col-md-1 control-label">指派时间</label>
+            <div class="col-sm-11">
+                <input name="sc_givetime" lay-verify="required" id="datatime" class="form-control"
+                    placeholder="请输入指派时间">
+            </div>
+        </div> -->
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">机会来源</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="sc_comming" lay-verify="required">
+                    <option value="0">促销</option>
+                    <option value="1">广告</option>
+                    <option value="2">搜索引擎</option>
+                    <option value="3">线上咨询</option>
+                    <option value="4">电话咨询</option>
+                    <option value="5">邮件咨询</option>
+                    <option value="6">客户介绍</option>
+                </select>
+            </div>
+        </div>
+
+
+        <!-- <div class="form-group">
+            <label class="col-md-1 control-label">状态</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="sc_status" lay-verify="required">
+                    <option value="0">未分配</option>
+                    <option value="1">已分配</option>
+                    <option value="2">开发成功</option>
+                    <option value="3">开发失败</option>
+                    <option value="4">开发中</option>
+                </select>
+            </div>
+        </div> -->
+
+
+        <div class="form-group">
+            <div class="form-group" align="center">
+                <button class="btn btn-success" lay-submit lay-filter="formDemo">添加</button>
+                <span style="margin-left: 30px;"></span>
+                <button type="reset" class="btn btn-info">重置</button>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <script>
+        //Demo
+        layui.use(['form', 'laydate', 'jquery'], function () {
+            var form = layui.form;
+
+            //从父页面获取数据
+            //const data = parent.dataRow;
+
+            var $ = layui.jquery;
+
+            // form.val("formTest", data); //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+
+            //选择日期与时间
+            var laydate = layui.laydate;
+            //日期时间选择器
+            laydate.render({
+                elem: '#datatime',
+                type: 'datetime'
+            });
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                // layer.msg(JSON.stringify(data.field));
+
+                data.field.sc_createuserid = window.sessionStorage.getItem("u_id");
+                // data.field.sc_giveuserid = window.sessionStorage.getItem("u_id"); 
+
+                //ajax提交异步请求
+                $.ajax({
+                    type: "POST", //请求方式
+                    url: "http://localhost:8080/saleChance/insertSale", //请求后端的url
+                    data: data.field, //传输到后端的数据
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.code == 200) {
+                            layer.msg(res.msg);
+                            //操作成功返回主页面
+                            setTimeout(() => {
+                                // //当你在iframe页面关闭自身时
+                                // var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                // parent.layer.close(index);
+                                // 关闭页面，刷新数据
+                                parent.location.reload();
+                                //再执行关闭
+                            }, 1200)
+                            // parent.location.reload();
+                            // console.log(res.msg);
+                        } else {
+                            //否则返回错误信息
+                            layer.msg(res.msg);
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

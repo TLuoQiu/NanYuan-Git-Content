@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../layui-v2.7.6/layui/css/layui.css" media="all">
+    <title>cuslist表单</title>
+
+</head>
+
+<body>
+    <!-- 工具栏列 -->
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="devplan">执行计划</a>
+        <a class="layui-btn layui-btn-xs" lay-event="devplan_success">开发成功</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="devplan_fail">开发失败</a>
+    </script>
+    <!-- <table id="demo" lay-filter="test"></table> -->
+    <table class="layui-hide" id="demo" lay-filter="test"></table>
+
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <!-- 引入sallist的js代码 -->
+    <script>
+        //定义全局变量，用来存储点击行的数据
+        var dataRow = null;
+
+
+
+        layui.use(['table', 'jquery'], function () {
+            var table = layui.table;
+
+            var $ = layui.jquery;
+            //第一个实例
+            table.render({
+                elem: '#demo',
+                height: 600,
+                page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'], //自定义分页布局
+                    //,curr: 5 //设定初始在第 5 页   
+                    groups: 1, //只显示 1 个连续页码  
+                    first: false, //不显示首页   
+                    last: false //不显示尾页
+                },
+                limit: 10,
+                limits: [5, 10, 15, 20],
+                url: 'http://localhost:8080/devPlan/getDev', //数据接口
+                // page: true ,//开启分页
+                cols: [
+                    [
+                        //表头
+                        {
+                            field: 'dp_id',
+                            title: '开发计划编号',
+                            width: 140,
+                            sort: true,
+                            fixed: 'left'
+                        }, {
+                            field: 'dp_plandate',
+                            title: '计划日期',
+                            width: 160
+                        }, {
+                            field: 'dp_value',
+                            title: '计划内容',
+                            width: 160,
+                            sort: true,
+                        }, {
+                            field: 'dp_exedate',
+                            title: '执行日期',
+                            width: 170,
+                        }, {
+                            field: 'dp_result',
+                            title: '执行结果',
+                            width: 120,
+                            sort: true,
+                            templet: function (d) {
+                                // d这个参数含有一行数据
+                                var res = null;
+                                switch (d.dp_result) {
+                                    case '0':
+                                        res = '开发中';
+                                        break;
+                                    case '1':
+                                        res = '开发成功';
+                                        break;
+                                    case '2':
+                                        res = '开发失败';
+                                        break;
+                                }
+                                return res;
+                            }
+                        }, {
+                            field: 'dp_exeperson',
+                            title: '执行人',
+                            width: 100,
+                            sort: true,
+                        }, {
+                            field: 'sc_id',
+                            title: '销售机会编号',
+                            width: 130,
+                            sort: true,
+                        }, {
+                            fixed: 'right',
+                            title: '操作',
+                            toolbar: '#barDemo',
+                            width: 240
+                        }
+                    ]
+                ]
+            });
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                // console.log(obj)
+                //将选中行的数据赋值给dataRow
+                dataRow = data;
+                // var r_id = window.sessionStorage.getItem("r_id");
+                if (obj.event === 'devplan_fail') {
+                    if (data.dp_result == 0) {
+                        // 设置为开发失败
+                        data.dp_result = 2;
+                        $.ajax({
+                            type: "POST", //请求方式
+                            url: "http://localhost:8080/devPlan/devPlanChance", //请求后端的url
+                            data: data, //传输到后端的数据cus_id,定义格式为json
+                            dataType: "JSON",
+                            success: function (res) {
+                                if (res.code == 200) {
+                                    layer.msg(res.msg);
+                                    // 刷新页面
+                                    // parent.location.reload();
+                                    //刷新页面
+                                    table.reload('demo', {
+                                        where: {},
+                                        page: {
+                                            curr: 1 //重新从第 1 页开始
+                                        }
+                                    }); //只重载数据表
+                                }
+                            }
+                        });
+                    } else if (data.dp_result == null) {
+                        layer.msg('该计划还未被执行,请先执行!');
+                    } else {
+                        layer.msg('该计划已被开发,不能再次开发!');
+                    }
+                } else if (obj.event === 'devplan_success') {
+                    // 获取到一行数据中的值，判断是否可以修改
+                    if (data.dp_result == 0) {
+                        // 设置为开发成功
+                        data.dp_result = 1;
+                        $.ajax({
+                            type: "POST", //请求方式
+                            url: "http://localhost:8080/devPlan/devPlanChance", //请求后端的url
+                            data: data, //传输到后端的数据cus_id,定义格式为json
+                            dataType: "JSON",
+                            success: function (res) {
+                                if (res.code == 200) {
+                                    layer.msg(res.msg);
+                                    // 刷新页面
+                                    table.reload('demo', {
+                                        where: {},
+                                        page: {
+                                            curr: 1 //重新从第 1 页开始
+                                        }
+                                    }); //只重载数据表
+                                }
+                            }
+                        });
+                    } else if (data.dp_result == null) {
+                        layer.msg('该计划还未被执行,请先执行!');
+                    } else {
+                        layer.msg('该计划已被开发,不能再次开发!');
+                    }
+                } else if (obj.event === 'devplan') {
+                    if (data.dp_result == 0 || data.dp_result == null) {
+                        layer.open({
+                            type: 2,
+                            content: 'devplan.html',
+                            area: ['90%', '60%'],
+                            title: '添加开发信息'
+                        });
+                    } else {
+                        layer.msg('该计划已被开发,不能再次开发!');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

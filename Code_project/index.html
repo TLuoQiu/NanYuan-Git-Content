@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>管理系统后台界面</title>
+    <link rel="stylesheet" href="layui-v2.7.6/layui/css/layui.css">
+</head>
+
+<style>
+    dd {
+        /* 左内边距，让元素向右移动一定距离 */
+        padding-left: 15px;
+    }
+
+    iframe {
+        width: 100%;
+    }
+</style>
+<script>
+    // 拦截非法访问，必须要登录才能访问index页面
+    var u_id = window.sessionStorage.getItem("u_id");
+    if (!u_id) {
+        location.href = "./Login/login.html";
+    }
+</script>
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo layui-hide-xs layui-bg-black">CRM后台管理系统</div>
+            <!-- 头部区域（可配合layui 已有的水平导航） -->
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                    <a href="javascript:;">
+                        <img src="../Login_interface/girl.jpg" class="layui-nav-img">
+                        User
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">Your Profile</a></dd>
+                        <dd><a href="">设置</a></dd>
+                        <dd><a href="">注销</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-more-vertical"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">营销管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="SaleChance/sallist.html" target="showContent">销售机会列表</a></dd>
+                            <ul class="layui-nav-tree">
+                                <li class="layui-nav-item layui-nav-itemed">
+                                    <a class="" href="javascript:;">&nbsp;&nbsp;&nbsp;营销计划管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a href="SaleChance/customizeplan.html" style="padding-left: 30px;"
+                                                target="showContent">计划定制</a></dd>
+                                        <dd><a href="DevPlan/devlist.html" style="padding-left: 30px;"
+                                                target="showContent">管理开发计划</a></dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">客户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="Customer/cuslist.html" target="showContent">客户列表</a></dd>
+                            <dd><a href="javascript:;">暂缓流失</a></dd>
+                        </dl>
+                    </li>
+                    <!-- <li class="layui-nav-item"><a href="javascript:;">服务管理</a></li>
+                    <li class="layui-nav-item"><a href=""></a></li> -->
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">服务管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">服务列表</a></dd>
+                            <dd><a href="javascript:;">暂服务处理</a></dd>
+                            <dd><a href="javascript:;">服务反馈</a></dd>
+                            <dd><a href="javascript:;">归档查询</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">报表统计</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="Customer/cusregion.html" target="showContent">客户地区统计</a></dd>
+                            <dd><a href="Customer/cusIndustry.html" target="showContent">客户行业统计</a></dd>
+                            <dd><a href="Customer/demo.html" target="showContent">客户地区分布</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">系统设置</a>
+                        <dl class="layui-nav-child">
+                            <!-- <dd><a href="javascript:;">客户列表</a></dd>
+                            <dd><a href="javascript:;">暂缓流失</a></dd> -->
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <!-- <table class="layui-hide" id="demo" lay-filter="test"></table> -->
+                <!-- 测试主体内容 -->
+                <iframe src="" frameborder="0" name="showContent" onload="adjustIframe();" id="bi_iframe">
+
+                </iframe>
+                <script>
+                    // 自定义iframe高度,适应全屏
+                    function adjustIframe() {
+                        const ifm = document.getElementById("bi_iframe");
+                        ifm.height = document.documentElement.clientHeight;
+                        ifm.width = document.documentElement.clientWidth;
+                    }
+                </script>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            <!-- 底部固定区域 -->
+            <div style="padding: 15px;">
+
+            </div>
+        </div>
+    </div>
+    <script src="layui-v2.7.6/layui/layui.js"></script>
+    <script>
+        //JS 
+        layui.use(['element', 'layer', 'util'], function () {
+            var element = layui.element,
+                layer = layui.layer,
+                util = layui.util,
+                $ = layui.$;
+
+            //头部事件
+            util.event('lay-header-event', {
+                //左侧菜单事件
+                menuLeft: function (othis) {
+                    layer.msg('展开左侧菜单的操作', {
+                        icon: 0
+                    });
+                },
+                menuRight: function () {
+                    layer.open({
+                        type: 1,
+                        content: '<div style="padding: 15px;">处理右侧面板的操作</div>',
+                        area: ['260px', '100%'],
+                        offset: 'rt', //右上角
+                        anim: 5,
+                        shadeClose: true
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../JS/echarts.js"></script>
+    <script src="../JS/jquery-3.7.0.min.js"></script>
+    <title>Document</title>
+    <style>
+        .div {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="display: flex;">
+        <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+        <div id="main" class="div"></div>
+        <div id="demo" style="width: 800px;height: 400px;"></div>
+    </div>
+
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        var myDemo = echarts.init(document.getElementById('demo'));
+        $.ajax({
+            type: "GET", //请求方式
+            url: "http://localhost:8080/customer/getCusRegion", //请求后端的url
+            dataType: "JSON",
+            success: function (res) {
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: '客户地区统计'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['地区']
+                    },
+                    xAxis: {
+                        data: res.xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '地区',
+                        type: 'bar',
+                        data: res.ydata
+                    }]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        })
+        $.ajax({
+            type: "GET", //请求方式
+            url: "http://localhost:8080/customer/showReport", //请求后端的url
+            dataType: "JSON",
+            success: function (res) {
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: '客户地区',
+                        subtext: '统计',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br />{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        left: 'center',
+                        top: 'bottom',
+                        data: []
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {
+                                show: true
+                            },
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            restore: {
+                                show: true
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    series: [{
+                            name: '范围模型',
+                            type: 'pie',
+                            radius: [20, 140],
+                            center: ['25%', '50%'],
+                            roseType: 'radius',
+                            itemStyle: {
+                                borderRadius: 5
+                            },
+                            label: {
+                                show: false
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            },
+                            data: res
+                        },
+                        {
+                            name: '区域模型',
+                            type: 'pie',
+                            radius: [20, 140],
+                            center: ['75%', '50%'],
+                            roseType: 'area',
+                            itemStyle: {
+                                borderRadius: 5
+                            },
+                            data: res
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myDemo.setOption(option);
+            }
+        })
+    </script>
+</body>
+
+</html>

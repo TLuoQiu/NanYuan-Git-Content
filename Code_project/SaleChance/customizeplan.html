@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../layui-v2.7.6/layui/css/layui.css" media="all">
+    <title>cuslist表单</title>
+
+</head>
+
+<body>
+    <!-- 工具栏列 -->
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">制定计划</a>
+    </script>
+    <!-- <table id="demo" lay-filter="test"></table> -->
+    <table class="layui-hide" id="demo" lay-filter="test"></table>
+
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <!-- 引入sallist的js代码 -->
+    <script>
+        //定义全局变量，用来存储点击行的数据
+        var dataRow = null;
+
+
+
+        layui.use(['table', 'jquery'], function () {
+            var table = layui.table;
+
+            var $ = layui.jquery;
+            // 通过url传入u_id给后端
+            var u_id = window.sessionStorage.getItem("u_id");
+            //第一个实例
+            table.render({
+                elem: '#demo',
+                height: 600,
+                page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'], //自定义分页布局
+                    //,curr: 5 //设定初始在第 5 页   
+                    groups: 1, //只显示 1 个连续页码  
+                    first: false, //不显示首页   
+                    last: false //不显示尾页
+                },
+                url: 'http://localhost:8080/saleChance/getManagerSale?u_id=' + u_id, //数据接口
+                // page: true ,//开启分页
+                cols: [
+                    [
+                        //表头
+                        {
+                            field: 'sc_id',
+                            title: '编号',
+                            width: 80,
+                            sort: true,
+                            fixed: 'left'
+                        }, {
+                            field: 'sc_cusname',
+                            title: '客户名称',
+                            width: 110
+                        }, {
+                            field: 'sc_comming',
+                            title: '机会来源',
+                            width: 110,
+                            sort: true,
+                            templet: function (d) {
+                                // d这个参数含有一行数据
+                                let res = null;
+                                switch (d.sc_comming) {
+                                    case 0:
+                                        res = '促销';
+                                        break;
+                                    case 1:
+                                        res = '广告';
+                                        break;
+                                    case 2:
+                                        res = '搜索引擎';
+                                        break;
+                                    case 3:
+                                        res = '线上咨询';
+                                        break;
+                                    case 4:
+                                        res = '电话咨询';
+                                        break;
+                                    case 5:
+                                        res = '邮件咨询';
+                                        break;
+                                    case 6:
+                                        res = '客户介绍';
+                                        break;
+                                }
+                                return res;
+                            }
+                        }, {
+                            field: 'sc_name',
+                            title: '联系人',
+                            width: 110,
+                        }, {
+                            field: 'sc_phone',
+                            title: '联系电话',
+                            width: 110,
+                        }, {
+                            field: 'sc_success',
+                            title: '成功机率',
+                            width: 115,
+                            sort: true,
+                        }, {
+                            field: 'sc_message',
+                            title: '概要',
+                            width: 115,
+                            sort: true,
+                        }, {
+                            field: 'sc_desc',
+                            title: '机会描述',
+                            width: 110
+                        }, {
+                            field: 'sc_createuserid',
+                            title: '创建人',
+                            width: 110,
+                            sort: true
+                        }, {
+                            field: 'sc_createtime',
+                            title: '创建时间',
+                            width: 116,
+                            sort: true
+                        }, {
+                            field: 'sc_giveuserid',
+                            title: '被指派人',
+                            width: 110,
+                            sort: true
+                        }, {
+                            field: 'sc_givetime',
+                            title: '指派时间',
+                            width: 110,
+                            sort: true
+                        }, {
+                            field: 'sc_status',
+                            title: '状态',
+                            width: 115,
+                            sort: true,
+                            templet: function (d) {
+                                // d这个参数含有一行数据
+                                let res = null;
+                                switch (d.sc_status) {
+                                    case 0:
+                                        res = '未分配';
+                                        break;
+                                    case 1:
+                                        res = '已分配';
+                                        break;
+                                    case 2:
+                                        res = '开发成功';
+                                        break;
+                                    case 3:
+                                        res = '开发失败';
+                                        break;
+                                    case 4:
+                                        res = '开发中';
+                                        break;
+                                }
+                                return res;
+                            }
+                        }, {
+                            fixed: 'right',
+                            title: '操作',
+                            toolbar: '#barDemo',
+                            width: 90
+                        }
+                    ]
+                ]
+            });
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                // console.log(obj)
+                //将选中行的数据赋值给dataRow
+                dataRow = data;
+
+                // window.sessionStorage.setItem("r_id", res.user.r_id);
+                if (obj.event === 'edit') {
+                    // 获取到一行数据中的值，判断是否可以修改
+                    // if (data.sc_status != 0) {
+                    //     layer.msg('只能编辑未分配的数据');
+                    // } else {
+                    layer.open({
+                        type: 2,
+                        content: '../DevPlan/devmsg.html',
+                        area: ['90%', '60%'],
+                        title: '制定计划'
+                    });
+                    // }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

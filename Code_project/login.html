@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./layui-v2.7.6/layui/css/layui.css" media="all">
+    <script src="./layui-v2.7.6/layui/layui.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入用户名" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码框</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        //Demo
+        layui.use(['form', 'jquery'], function () {
+            var form = layui.form;
+
+            var $ = layui.jquery;
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                //ajax提交异步请求
+                $.ajax({
+                    type: "POST", //请求方式
+                    url: "http://localhost:8080/user/login", //请求后端的url
+                    data: data.field, //传输到后端的数据
+                    dataType: "JSON",
+                    success: function (res) {
+                        console.log(res.msg);
+                        if (res.msg) {
+                            layer.msg("登录成功");
+                            //将登录用户的u_id,r_id存到session缓存里，供后续使用
+                            window.sessionStorage.setItem("u_id", res.user.u_id);
+                            window.sessionStorage.setItem("r_id", res.user.r_id);
+                            location.href = "./index.html"
+                        } else {
+                            layer.msg("登录失败");
+
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layui-v2.7.6/layui/css/layui.css">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="layui-form form-horizontal" style="margin-top: 20px;" method="" lay-filter="formTest">
+        <!-- <div class="form-group">
+            <label class="col-md-1 control-label">客户编号</label>
+            <div class="col-sm-11">
+                <input name="cus_id" class="form-control" placeholder="有则如实填写，没有可忽略">
+            </div>
+        </div> -->
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户名称</label>
+            <div class="col-sm-11">
+                <input name="cus_name" lay-verify="required" class="form-control" placeholder="请输入客户名称">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户地址</label>
+            <div class="col-sm-11">
+                <input name="cus_addr" lay-verify="required" class="form-control" placeholder="请输入客户地址">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户邮编</label>
+            <div class="col-sm-11">
+                <input name="cus_zipcode" lay-verify="number" class="form-control" placeholder="请输入客户邮编">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户电话</label>
+            <div class="col-sm-11">
+                <input name="cus_phone" lay-verify="phone" class="form-control" placeholder="请输入客户电话">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户传真</label>
+            <div class="col-sm-11">
+                <input name="cus_fax" lay-verify="required" class="form-control" placeholder="请输入客户传真">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户网址</label>
+            <div class="col-sm-11">
+                <input name="cus_url" lay-verify="required" class="form-control" placeholder="请输入客户网址">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户经理id</label>
+            <div class="col-sm-11">
+                <input name="user_id" lay-verify="number" class="form-control" placeholder="请输入客户经理id">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">创建时间</label>
+            <div class="col-sm-11">
+                <input name="cus_createtime" lay-verify="required" id="datatime" class="form-control"
+                    placeholder="请输入创建时间">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户地区</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_region" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">东北</option>
+                    <option value="2">华北</option>
+                    <option value="3">西北</option>
+                    <option value="4">西南</option>
+                    <option value="5">华南</option>
+                    <option value="6">华中</option>
+                    <option value="7">华东</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户行业</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_industry" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">金融</option>
+                    <option value="2">房地产</option>
+                    <option value="3">商业服务</option>
+                    <option value="4">物流运输</option>
+                    <option value="5">生产</option>
+                    <option value="6">政府</option>
+                    <option value="7">文化传媒</option>
+                    <option value="8">其他</option>
+                </select>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户等级</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_level" lay-verify="required">
+                    <option value=""></option>
+                    <option value="A">重点客户</option>
+                    <option value="B">普通客户</option>
+                    <option value="C">非优先客户</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户满意度</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_satisfy" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                    <option value="4">四级</option>
+                    <option value="5">五级</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户信用度</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_credit" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                    <option value="4">四级</option>
+                    <option value="5">五级</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户状态</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_status" lay-verify="required">
+                    <option value="1">正常</option>
+                    <option value="0">流失</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="form-group" align="center">
+                <button class="btn btn-success" lay-submit lay-filter="formDemo">添加</button>
+                <span style="margin-left: 30px;"></span>
+                <button type="reset" class="btn btn-info">重置</button>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <script>
+        //Demo
+        layui.use(['form', 'laydate', 'jquery'], function () {
+            var form = layui.form;
+
+            //从父页面获取数据
+            //const data = parent.dataRow;
+
+            var $ = layui.jquery;
+
+            // form.val("formTest", data); //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+
+            //选择日期与时间
+            var laydate = layui.laydate;
+            //日期时间选择器
+            laydate.render({
+                elem: '#datatime',
+                type: 'datetime'
+            });
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                // layer.msg(JSON.stringify(data.field));
+
+                //ajax提交异步请求
+                $.ajax({
+                    type: "POST", //请求方式
+                    url: "http://localhost:8080/customer/insertCus", //请求后端的url
+                    data: data.field, //传输到后端的数据
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.code == 200) {
+                            layer.msg(res.msg);
+                            //操作成功返回主页面
+                            setTimeout(() => {
+                                // //当你在iframe页面关闭自身时
+                                // var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                // parent.layer.close(index);
+                                // 关闭页面，刷新数据
+                                parent.location.reload();
+                                //再执行关闭
+                            }, 1200)
+                            // parent.location.reload();
+                            // console.log(res.msg);
+                        } else {
+                            //否则返回错误信息
+                            layer.msg(res.msg);
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

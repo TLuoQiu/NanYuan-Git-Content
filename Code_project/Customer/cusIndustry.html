@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../JS/echarts.js"></script>
+    <script src="../JS/jquery-3.7.0.min.js"></script>
+    <title>Document</title>
+    <style>
+        .div {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="display: flex;">
+        <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+        <div id="main" class="div"></div>
+        <div id="demo" class="div"></div>
+    </div>
+
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        var myDemo = echarts.init(document.getElementById('demo'));
+        $.ajax({
+            type: "GET", //请求方式
+            url: "http://localhost:8080/customer/getCusIndustry", //请求后端的url
+            dataType: "JSON",
+            success: function (res) {
+                // 指定图表的配置项和数据
+                var option = {
+                    title: [{
+                        text: '客户行业统计'
+                    }],
+                    polar: {
+                        radius: [30, '80%']
+                    },
+                    angleAxis: {
+                        max: res.max,
+                        startAngle: 75
+                    },
+                    radiusAxis: {
+                        type: 'category',
+                        data: res.xdata
+                    },
+                    tooltip: {},
+                    series: {
+                        type: 'bar',
+                        data: res.ydata,
+                        coordinateSystem: 'polar',
+                        label: {
+                            show: true,
+                            position: 'middle',
+                            formatter: '{b}: {c}'
+                        }
+                    }
+                };
+                var option1 = {
+                    xAxis: {
+                        type: 'category',
+                        data: res.xdata
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: res.ydata,
+                        type: 'line',
+                        smooth: true
+                    }]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+                myDemo.setOption(option1);
+            }
+        })
+    </script>
+</body>
+
+</html>

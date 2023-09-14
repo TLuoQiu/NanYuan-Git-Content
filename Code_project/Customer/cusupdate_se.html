@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layui-v2.7.6/layui/css/layui.css">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <title>客户修改页面</title>
+</head>
+
+<body>
+    <!-- <div class="layui-inline">
+        <label class="layui-form-label">日期时间选择器</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+        </div>
+    </div>
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //日期时间选择器
+            laydate.render({
+                elem: '#test5',
+                type: 'datetime'
+            });
+        });
+    </script> -->
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="cus_id" class="layui-input" readonly>
+            </div>
+        </div>
+        <!-- <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cus_name" required lay-verify="required" placeholder="请输入客户名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户名称</label>
+            <div class="col-sm-11">
+                <input type="email" name="cus_name" class="form-control" placeholder="请输入客户名称" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cus_name" required lay-verify="required" placeholder="请输入客户名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cus_name" required lay-verify="required" placeholder="请输入客户名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cus_name" required lay-verify="required" placeholder="请输入客户名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cus_name" required lay-verify="required" placeholder="请输入客户名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="cus_name" required lay-verify="required" placeholder="请输入客户名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户地区</label>
+            <div class="layui-input-block">
+                <select name="cus_region" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">东北</option>
+                    <option value="2">华北</option>
+                    <option value="3">西北</option>
+                    <option value="4">西南</option>
+                    <option value="5">华南</option>
+                    <option value="6">华中</option>
+                    <option value="7">华东</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户行业</label>
+            <div class="layui-input-block">
+                <select name="cus_industry" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">金融</option>
+                    <option value="2">房地产</option>
+                    <option value="3">商业服务</option>
+                    <option value="4">物流运输</option>
+                    <option value="5">生产</option>
+                    <option value="6">政府</option>
+                    <option value="7">文化传媒</option>
+                    <option value="7">其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户等级</label>
+            <div class="layui-input-block">
+                <select name="cus_level" lay-verify="required">
+                    <option value=""></option>
+                    <option value="A">重点客户</option>
+                    <option value="B">普通客户</option>
+                    <option value="C">非优先客户</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户满意度</label>
+            <div class="layui-input-block">
+                <select name="cus_satisfy" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                    <option value="4">四级</option>
+                    <option value="5">五级</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户信用度</label>
+            <div class="layui-input-block">
+                <select name="cus_credit" lay-verify="required">
+                    <option value=""></option>
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                    <option value="4">四级</option>
+                    <option value="5">五级</option>
+                </select>
+            </div>
+        </div>
+        <!-- <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div> -->
+        <div class="form-group">
+            <div class="form-group" align="center">
+                <button class="btn btn-success" lay-submit lay-filter="formDemo">修改</button>
+                <span style="margin-left: 30px;"></span>
+                <button type="reset" class="btn btn-info">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

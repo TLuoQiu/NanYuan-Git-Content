@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layui-v2.7.6/layui/css/layui.css">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="layui-form form-horizontal" style="margin-top: 20px;" method="" lay-filter="formTest">
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户编号</label>
+            <div class="col-sm-11">
+                <input name="cus_id" class="form-control" readonly>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户名称</label>
+            <div class="col-sm-11">
+                <input name="cus_name" lay-verify="required" class="form-control" placeholder="请输入客户名称">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户地址</label>
+            <div class="col-sm-11">
+                <input name="cus_addr" lay-verify="required" class="form-control" placeholder="请输入客户地址">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户邮编</label>
+            <div class="col-sm-11">
+                <input name="cus_zipcode" lay-verify="number" class="form-control" placeholder="请输入客户邮编">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户电话</label>
+            <div class="col-sm-11">
+                <input name="cus_phone" lay-verify="phone" class="form-control" placeholder="请输入客户电话">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户传真</label>
+            <div class="col-sm-11">
+                <input name="cus_fax" class="form-control" placeholder="请输入客户传真">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户网址</label>
+            <div class="col-sm-11">
+                <input name="cus_url" class="form-control" placeholder="请输入客户网址">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户经理id</label>
+            <div class="col-sm-11">
+                <input name="user_id" lay-verify="number" class="form-control" placeholder="请输入客户经理id">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">创建时间</label>
+            <div class="col-sm-11">
+                <input name="cus_createtime" lay-verify="required" id="datatime" class="form-control"
+                    placeholder="请输入创建时间">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户地区</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_region" lay-verify="required">
+                    <option value="1">东北</option>
+                    <option value="2">华北</option>
+                    <option value="3">西北</option>
+                    <option value="4">西南</option>
+                    <option value="5">华南</option>
+                    <option value="6">华中</option>
+                    <option value="7">华东</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户行业</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_industry" lay-verify="required">
+                    <option value="1">金融</option>
+                    <option value="2">房地产</option>
+                    <option value="3">商业服务</option>
+                    <option value="4">物流运输</option>
+                    <option value="5">生产</option>
+                    <option value="6">政府</option>
+                    <option value="7">文化传媒</option>
+                    <option value="8">其他</option>
+                </select>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户等级</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_level" lay-verify="required">
+                    <option value="A">重点客户</option>
+                    <option value="B">普通客户</option>
+                    <option value="C">非优先客户</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户满意度</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_satisfy">
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                    <option value="4">四级</option>
+                    <option value="5">五级</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户信用度</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_credit">
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                    <option value="4">四级</option>
+                    <option value="5">五级</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-1 control-label">客户状态</label>
+            <div class="col-sm-11">
+                <select class="form-control" name="cus_status" lay-verify="required">
+                    <option value="1">正常</option>
+                    <option value="0">流失</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="form-group" align="center">
+                <button class="btn btn-success" lay-submit lay-filter="formDemo">修改</button>
+                <span style="margin-left: 30px;"></span>
+                <button type="reset" class="btn btn-info">重置</button>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="../layui-v2.7.6/layui/layui.js"></script>
+    <script src="cus_js/cusupdata.js"></script>
+</body>
+
+</html>
